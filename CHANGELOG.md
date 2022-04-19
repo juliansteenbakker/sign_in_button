@@ -2,6 +2,11 @@
 Forked from flutter_signin_button with the following changes:
 BREAKING:
 - The buttons enums changed to lowerCamelCase
+- font_awesome_flutter is upgraded from v9 to v10
+
+Other changes:
+- Applied lint style
+- Updated example app
 
 ## 2.0.0
 

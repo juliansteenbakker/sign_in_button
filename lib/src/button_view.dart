@@ -9,7 +9,7 @@ class SignInButton extends StatelessWidget {
   ///
   /// The `SignInButton` class already contains general used buttons.
   /// In case of other buttons, user can always use `SignInButtonBuilder`
-  /// to build the signin button.
+  /// to build the sign in button.
 
   /// onPressed function should be passed in as a required field.
   final Function onPressed;
@@ -234,7 +234,7 @@ class SignInButton extends StatelessWidget {
           key: const ValueKey('Hotmail'),
           mini: mini,
           text: text ?? 'Sign in with Hotmail',
-          icon: FontAwesomeIcons.sms,
+          icon: FontAwesomeIcons.commentSms,
           backgroundColor: const Color(0x000072c6),
           onPressed: onPressed,
           padding: padding,

@@ -1,4 +1,6 @@
-A Flutter plugin for iOS and Android for generating signin buttons for different social media account.
+Fork from flutter_signin_button.
+
+A Flutter plugin for iOS and Android for generating sign-in buttons for different social media account.
 
 > Feedback and Pull Requests are most welcome!
 
@@ -9,7 +11,7 @@ Add to pubspec.yaml.
 ```yaml
 dependencies:
   ...
-  sign_in_button: ^2.0.0
+  sign_in_button: ^3.0.0
 ```
 
 ## Usage Example
@@ -61,21 +63,27 @@ SignInButtonBuilder(
 
 ```dart
 enum Buttons {
-  Apple,
-  AppleDark,
-  Email,
-  Google,
-  GoogleDark,
-  Facebook,
-  FacebookNew,
-  GitHub,
-  LinkedIn,
-  Pinterest,
-  Tumblr,
-  Twitter
+  email,
+  google,
+  googleDark,
+  facebook,
+  facebookNew,
+  gitHub,
+  apple,
+  appleDark,
+  linkedIn,
+  pinterest,
+  tumblr,
+  twitter,
+  reddit,
+  quora,
+  yahoo,
+  hotmail,
+  xbox,
+  microsoft,
 }
 ```
 
-<img src="https://github.com/ZaynJarvis/Flutter-Sign-in-Button/raw/master/showcase.png" width="300">
+<img src="https://github.com/juliansteenbakker/sign_in_button/raw/master/showcase.png" width="300">
 
 **Refer to example folder and the source code for more information.**
