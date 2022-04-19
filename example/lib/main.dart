@@ -23,11 +23,13 @@ class MyApp extends StatelessWidget {
 class SignInPage extends StatelessWidget {
   /// Show a simple "___ Button Pressed" indicator
   void _showButtonPressDialog(BuildContext context, String provider) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('$provider Button Pressed!'),
-      backgroundColor: Colors.black26,
-      duration: const Duration(milliseconds: 400),
-    ));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('$provider Button Pressed!'),
+        backgroundColor: Colors.black26,
+        duration: const Duration(milliseconds: 400),
+      ),
+    );
   }
 
   /// Normally the signin buttons should be contained in the SignInPage
@@ -48,35 +50,35 @@ class SignInPage extends StatelessWidget {
           ),
           const Divider(),
           SignInButton(
-            Buttons.Google,
+            Buttons.google,
             onPressed: () {
               _showButtonPressDialog(context, 'Google');
             },
           ),
           const Divider(),
           SignInButton(
-            Buttons.GoogleDark,
+            Buttons.googleDark,
             onPressed: () {
               _showButtonPressDialog(context, 'Google (dark)');
             },
           ),
           const Divider(),
           SignInButton(
-            Buttons.FacebookNew,
+            Buttons.facebookNew,
             onPressed: () {
               _showButtonPressDialog(context, 'FacebookNew');
             },
           ),
           const Divider(),
           SignInButton(
-            Buttons.Apple,
+            Buttons.apple,
             onPressed: () {
               _showButtonPressDialog(context, 'Apple');
             },
           ),
           const Divider(),
           SignInButton(
-            Buttons.GitHub,
+            Buttons.gitHub,
             text: 'Sign up with GitHub',
             onPressed: () {
               _showButtonPressDialog(context, 'Github');
@@ -84,7 +86,7 @@ class SignInPage extends StatelessWidget {
           ),
           const Divider(),
           SignInButton(
-            Buttons.Microsoft,
+            Buttons.microsoft,
             text: 'Sign up with Microsoft ',
             onPressed: () {
               _showButtonPressDialog(context, 'Microsoft ');
@@ -92,7 +94,7 @@ class SignInPage extends StatelessWidget {
           ),
           const Divider(),
           SignInButton(
-            Buttons.Twitter,
+            Buttons.twitter,
             text: 'Use Twitter',
             onPressed: () {
               _showButtonPressDialog(context, 'Twitter');
@@ -103,21 +105,21 @@ class SignInPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SignInButton(
-                Buttons.LinkedIn,
+                Buttons.linkedIn,
                 mini: true,
                 onPressed: () {
                   _showButtonPressDialog(context, 'LinkedIn (mini)');
                 },
               ),
               SignInButton(
-                Buttons.Tumblr,
+                Buttons.tumblr,
                 mini: true,
                 onPressed: () {
                   _showButtonPressDialog(context, 'Tumblr (mini)');
                 },
               ),
               SignInButton(
-                Buttons.Facebook,
+                Buttons.facebook,
                 mini: true,
                 onPressed: () {
                   _showButtonPressDialog(context, 'Facebook (mini)');

@@ -24,13 +24,13 @@ import 'package:sign_in_button/sign_in_button.dart';
 
 ```dart
 SignInButton(
-  Buttons.Google,
+  Buttons.google,
   onPressed: () {},
 )
 
 // with custom text
 SignInButton(
-  Buttons.Google,
+  Buttons.google,
   text: "Sign up with Google",
   onPressed: () {},
 )
@@ -40,7 +40,7 @@ SignInButton(
 
 ```dart
 SignInButton(
-  Buttons.Facebook,
+  Buttons.facebook,
   mini: true,
   onPressed: () {},
 )

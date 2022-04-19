@@ -25,17 +25,18 @@ class SignInButtonBuilder extends StatelessWidget {
 
   /// backgroundColor is required but textColor is default to `Colors.white`
   /// splashColor is default to `Colors.white30`
-  final Color textColor,
-      iconColor,
-      backgroundColor,
-      splashColor,
-      highlightColor;
+  final Color textColor;
+  final Color iconColor;
+  final Color backgroundColor;
+  final Color splashColor;
+  final Color highlightColor;
 
   /// onPressed should be specified as a required field to indicate the callback.
   final Function onPressed;
 
   /// padding is default to `EdgeInsets.all(3.0)`
-  final EdgeInsets? padding, innerPadding;
+  final EdgeInsets? padding;
+  final EdgeInsets? innerPadding;
 
   /// shape is to specify the custom shape of the widget.
   /// However the flutter widgets contains restriction or bug
@@ -81,20 +82,20 @@ class SignInButtonBuilder extends StatelessWidget {
       minWidth: mini ? width ?? 35.0 : null,
       height: height,
       elevation: elevation,
-      padding: padding ?? const EdgeInsets.all(0),
+      padding: padding ?? EdgeInsets.zero,
       color: backgroundColor,
       onPressed: onPressed as void Function()?,
       splashColor: splashColor,
       highlightColor: highlightColor,
-      child: _getButtonChild(context),
       shape: shape ?? ButtonTheme.of(context).shape,
+      child: _getButtonChild(context),
     );
   }
 
   /// Get the inner content of a button
-  Container _getButtonChild(BuildContext context) {
+  Widget _getButtonChild(BuildContext context) {
     if (mini) {
-      return Container(
+      return SizedBox(
         width: height ?? 35.0,
         height: width ?? 35.0,
         child: _getIconOrImage(),
@@ -106,7 +107,6 @@ class SignInButtonBuilder extends StatelessWidget {
       ),
       child: Center(
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(
               padding: innerPadding ??

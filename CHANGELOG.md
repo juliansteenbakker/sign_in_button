@@ -1,3 +1,8 @@
+## 3.0.0
+Forked from flutter_signin_button with the following changes:
+BREAKING:
+- The buttons enums changed to lowerCamelCase
+
 ## 2.0.0
 
 - Migrated package to null safety
