@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sign_in_button/button_builder.dart';
-import 'package:sign_in_button/button_list.dart';
+import 'package:sign_in_button/src/button_builder.dart';
+import 'package:sign_in_button/src/button_list.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignInButton extends StatelessWidget {
