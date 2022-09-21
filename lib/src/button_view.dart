@@ -262,6 +262,21 @@ class SignInButton extends StatelessWidget {
           padding: padding,
           shape: shape,
         );
+      case Buttons.anonymous:
+        return SignInButtonBuilder(
+          elevation: elevation,
+          key: const ValueKey('Anonymous'),
+          mini: mini,
+          text: text ?? 'Anonymous',
+          textColor: const Color.fromRGBO(0, 0, 0, 0.9),
+          icon: Icons.account_circle,
+          iconColor: Colors.grey,
+          backgroundColor: const Color(0xFFFFFFFF),
+          onPressed: onPressed,
+          padding: padding,
+          shape: shape,
+          height: 36.0,
+        );
       case Buttons.email:
       default:
         return SignInButtonBuilder(
