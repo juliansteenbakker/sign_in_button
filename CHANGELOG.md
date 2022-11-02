@@ -1,3 +1,7 @@
+## 3.1.0
+- Added new anonymous button. (Thanks @juggler98 !)
+- Updated colors of apple and google sign in button text to mach each other. (Thanks @juggler98 !)
+
 ## 3.0.0
 Forked from flutter_signin_button with the following changes:
 BREAKING:
