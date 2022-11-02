@@ -63,7 +63,7 @@ class SignInButton extends StatelessWidget {
           key: const ValueKey('Google'),
           text: text ?? 'Sign in with Google',
           textColor: button == Buttons.google
-              ? const Color.fromRGBO(0, 0, 0, 0.54)
+              ? const Color.fromRGBO(0, 0, 0, 0.9)
               : const Color(0xFFFFFFFF),
           image: Container(
             margin: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
@@ -137,7 +137,9 @@ class SignInButton extends StatelessWidget {
           key: const ValueKey('Apple'),
           mini: mini,
           text: text ?? 'Sign in with Apple',
-          textColor: button == Buttons.apple ? Colors.black : Colors.white,
+          textColor: button == Buttons.apple
+              ? const Color.fromRGBO(0, 0, 0, 0.9)
+              : Colors.white,
           icon: FontAwesomeIcons.apple,
           iconColor: button == Buttons.apple ? Colors.black : Colors.white,
           backgroundColor: button == Buttons.apple
@@ -261,6 +263,21 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+        );
+      case Buttons.anonymous:
+        return SignInButtonBuilder(
+          elevation: elevation,
+          key: const ValueKey('Anonymous'),
+          mini: mini,
+          text: text ?? 'Anonymous',
+          textColor: const Color.fromRGBO(0, 0, 0, 0.9),
+          icon: Icons.account_circle,
+          iconColor: Colors.grey,
+          backgroundColor: const Color(0xFFFFFFFF),
+          onPressed: onPressed,
+          padding: padding,
+          shape: shape,
+          height: 36.0,
         );
       case Buttons.email:
       default:

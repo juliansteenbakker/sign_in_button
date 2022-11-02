@@ -18,4 +18,5 @@ enum Buttons {
   hotmail,
   xbox,
   microsoft,
+  anonymous,
 }
