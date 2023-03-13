@@ -32,6 +32,11 @@ class SignInButton extends StatelessWidget {
   // overrides the default button elevation
   final double elevation;
 
+  /// {@macro flutter.material.Material.clipBehavior}
+  ///
+  /// Defaults to [Clip.none], and must not be null.
+  final Clip clipBehavior;
+
   /// The constructor is fairly self-explanatory.
   const SignInButton(
     this.button, {
@@ -42,6 +47,7 @@ class SignInButton extends StatelessWidget {
     this.shape,
     this.text,
     this.elevation = 2.0,
+    this.clipBehavior = Clip.none,
   })  : assert(
           mini != true ||
               !(button == Buttons.google ||
@@ -88,6 +94,7 @@ class SignInButton extends StatelessWidget {
           innerPadding: EdgeInsets.zero,
           shape: shape,
           height: 36.0,
+          clipBehavior: clipBehavior,
         );
       case Buttons.facebook:
       case Buttons.facebookNew:
@@ -117,6 +124,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.gitHub:
         return SignInButtonBuilder(
@@ -129,6 +137,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.apple:
       case Buttons.appleDark:
@@ -148,6 +157,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.linkedIn:
         return SignInButtonBuilder(
@@ -160,6 +170,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.pinterest:
         return SignInButtonBuilder(
@@ -172,6 +183,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.tumblr:
         return SignInButtonBuilder(
@@ -184,6 +196,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.twitter:
         return SignInButtonBuilder(
@@ -196,6 +209,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.reddit:
         return SignInButtonBuilder(
@@ -208,6 +222,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.quora:
         return SignInButtonBuilder(
@@ -219,6 +234,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.yahoo:
         return SignInButtonBuilder(
@@ -230,6 +246,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.hotmail:
         return SignInButtonBuilder(
@@ -241,6 +258,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.xbox:
         return SignInButtonBuilder(
@@ -252,6 +270,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.microsoft:
         return SignInButtonBuilder(
@@ -263,6 +282,7 @@ class SignInButton extends StatelessWidget {
           onPressed: onPressed,
           padding: padding,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
       case Buttons.anonymous:
         return SignInButtonBuilder(
@@ -278,6 +298,7 @@ class SignInButton extends StatelessWidget {
           padding: padding,
           shape: shape,
           height: 36.0,
+          clipBehavior: clipBehavior,
         );
       case Buttons.email:
       default:
@@ -291,6 +312,7 @@ class SignInButton extends StatelessWidget {
           padding: padding,
           backgroundColor: Colors.grey[700]!,
           shape: shape,
+          clipBehavior: clipBehavior,
         );
     }
   }

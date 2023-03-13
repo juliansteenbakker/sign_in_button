@@ -52,6 +52,11 @@ class SignInButtonBuilder extends StatelessWidget {
   /// width is default to be 1/1.5 of the screen
   final double? width;
 
+  /// {@macro flutter.material.Material.clipBehavior}
+  ///
+  /// Defaults to [Clip.none], and must not be null.
+  final Clip clipBehavior;
+
   /// The constructor is self-explanatory.
   const SignInButtonBuilder({
     Key? key,
@@ -72,6 +77,7 @@ class SignInButtonBuilder extends StatelessWidget {
     this.shape,
     this.height,
     this.width,
+    this.clipBehavior = Clip.none,
   }) : super(key: key);
 
   /// The build function will be help user to build the signin button widget.
@@ -88,6 +94,7 @@ class SignInButtonBuilder extends StatelessWidget {
       splashColor: splashColor,
       highlightColor: highlightColor,
       shape: shape ?? ButtonTheme.of(context).shape,
+      clipBehavior: clipBehavior,
       child: _getButtonChild(context),
     );
   }
