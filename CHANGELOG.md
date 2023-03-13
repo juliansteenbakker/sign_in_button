@@ -1,3 +1,6 @@
+## 3.2.0
+Added clipBehavior property to customize the button's clipping. (Thanks @sarbogast !)
+
 ## 3.1.0
 - Added new anonymous button. (Thanks @juggler98 !)
 - Updated colors of apple and google sign in button text to mach each other. (Thanks @juggler98 !)
