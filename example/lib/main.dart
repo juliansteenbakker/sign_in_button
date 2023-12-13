@@ -12,10 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        useMaterial3: true,
-        visualDensity: VisualDensity.standard
-      ),
+      theme:
+          ThemeData(useMaterial3: true, visualDensity: VisualDensity.standard),
       home: const Scaffold(
         backgroundColor: Color.fromRGBO(50, 50, 50, 1.0),
         body: SignInPage(),

@@ -78,7 +78,8 @@ class SignInButton extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: const Image(
-                image: AssetImage('assets/logos/google_light.png',
+                image: AssetImage(
+                  'assets/logos/google_light.png',
                   package: 'sign_in_button',
                 ),
                 height: 36.0,
@@ -144,14 +145,14 @@ class SignInButton extends StatelessWidget {
           textStyle: textStyle,
           icon: FontAwesomeIcons.facebookF,
           image: const ClipRRect(
-                  child: Image(
-                    image: AssetImage(
-                      'assets/logos/facebook_new.png',
-                      package: 'sign_in_button',
-                    ),
-                    height: 24.0,
-                  ),
-                ),
+            child: Image(
+              image: AssetImage(
+                'assets/logos/facebook_new.png',
+                package: 'sign_in_button',
+              ),
+              height: 24.0,
+            ),
+          ),
           backgroundColor: const Color(0xFF3B5998),
           innerPadding: const EdgeInsets.fromLTRB(12, 0, 11, 0),
           onPressed: onPressed,
