@@ -67,33 +67,53 @@ class SignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (button) {
       case Buttons.google:
-      case Buttons.googleDark:
         return SignInButtonBuilder(
           elevation: elevation,
           key: const ValueKey('Google'),
           text: text ?? 'Sign in with Google',
           textStyle: textStyle,
-          textColor: button == Buttons.google
-              ? const Color.fromRGBO(0, 0, 0, 0.9)
-              : const Color(0xFFFFFFFF),
+          textColor: const Color.fromRGBO(0, 0, 0, 0.9),
           image: Container(
             margin: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: Image(
-                image: AssetImage(
-                  button == Buttons.google
-                      ? 'assets/logos/google_light.png'
-                      : 'assets/logos/google_dark.png',
+              child: const Image(
+                image: AssetImage('assets/logos/google_light.png',
                   package: 'sign_in_button',
                 ),
                 height: 36.0,
               ),
             ),
           ),
-          backgroundColor: button == Buttons.google
-              ? const Color(0xFFFFFFFF)
-              : const Color(0xFF4285F4),
+          backgroundColor: const Color(0xFFFFFFFF),
+          onPressed: onPressed,
+          padding: padding,
+          innerPadding: EdgeInsets.zero,
+          shape: shape,
+          height: 36.0,
+          clipBehavior: clipBehavior,
+        );
+      case Buttons.googleDark:
+        return SignInButtonBuilder(
+          elevation: elevation,
+          key: const ValueKey('Google'),
+          text: text ?? 'Sign in with Google',
+          textStyle: textStyle,
+          textColor: const Color(0xFFFFFFFF),
+          image: Container(
+            margin: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: const Image(
+                image: AssetImage(
+                  'assets/logos/google_dark.png',
+                  package: 'sign_in_button',
+                ),
+                height: 36.0,
+              ),
+            ),
+          ),
+          backgroundColor: const Color(0xFF4285F4),
           onPressed: onPressed,
           padding: padding,
           innerPadding: EdgeInsets.zero,
