@@ -157,9 +157,9 @@ class SignInButtonBuilder extends StatelessWidget {
   }
 
   /// Get the icon or image widget
-  Widget? _getIconOrImage() {
+  Widget _getIconOrImage() {
     if (image != null) {
-      return image;
+      return image!;
     }
     return Icon(
       icon,
