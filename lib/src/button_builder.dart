@@ -140,13 +140,13 @@ class SignInButtonBuilder extends StatelessWidget {
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
-              text,
-              style: textStyle ??
-                  TextStyle(
-                    color: textColor,
-                    fontSize: fontSize,
-                    backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
-                  ),
+                  text,
+                  style: textStyle ??
+                      TextStyle(
+                        color: textColor,
+                        fontSize: fontSize,
+                        backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
+                      ),
                 ),
               ),
             ),
