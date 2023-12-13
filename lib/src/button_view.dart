@@ -72,7 +72,7 @@ class SignInButton extends StatelessWidget {
           key: const ValueKey('Google'),
           text: text ?? 'Sign in with Google',
           textStyle: textStyle,
-          textColor: const Color.fromRGBO(0, 0, 0, 0.9),
+          textColor: const Color(0xFF1F1F1F),
           image: Container(
             margin: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
             child: ClipRRect(
@@ -99,7 +99,7 @@ class SignInButton extends StatelessWidget {
           key: const ValueKey('Google'),
           text: text ?? 'Sign in with Google',
           textStyle: textStyle,
-          textColor: const Color(0xFFFFFFFF),
+          textColor: const Color(0xFFE3E3E3),
           image: Container(
             margin: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
             child: ClipRRect(
@@ -122,6 +122,19 @@ class SignInButton extends StatelessWidget {
           clipBehavior: clipBehavior,
         );
       case Buttons.facebook:
+        return SignInButtonBuilder(
+          elevation: elevation,
+          key: const ValueKey('Facebook'),
+          mini: mini,
+          text: text ?? 'Sign in with Facebook',
+          textStyle: textStyle,
+          icon: FontAwesomeIcons.facebookF,
+          backgroundColor: const Color(0xFF3B5998),
+          onPressed: onPressed,
+          padding: padding,
+          shape: shape,
+          clipBehavior: clipBehavior,
+        );
       case Buttons.facebookNew:
         return SignInButtonBuilder(
           elevation: elevation,
@@ -130,8 +143,7 @@ class SignInButton extends StatelessWidget {
           text: text ?? 'Sign in with Facebook',
           textStyle: textStyle,
           icon: FontAwesomeIcons.facebookF,
-          image: button == Buttons.facebookNew
-              ? const ClipRRect(
+          image: const ClipRRect(
                   child: Image(
                     image: AssetImage(
                       'assets/logos/facebook_new.png',
@@ -139,14 +151,9 @@ class SignInButton extends StatelessWidget {
                     ),
                     height: 24.0,
                   ),
-                )
-              : null,
-          backgroundColor: button == Buttons.facebookNew
-              ? const Color(0xFF1877f2)
-              : const Color(0xFF3B5998),
-          innerPadding: button == Buttons.facebookNew
-              ? const EdgeInsets.fromLTRB(12, 0, 11, 0)
-              : null,
+                ),
+          backgroundColor: const Color(0xFF3B5998),
+          innerPadding: const EdgeInsets.fromLTRB(12, 0, 11, 0),
           onPressed: onPressed,
           padding: padding,
           shape: shape,
@@ -167,6 +174,21 @@ class SignInButton extends StatelessWidget {
           clipBehavior: clipBehavior,
         );
       case Buttons.apple:
+        return SignInButtonBuilder(
+          elevation: elevation,
+          key: const ValueKey('Apple'),
+          mini: mini,
+          text: text ?? 'Sign in with Apple',
+          textStyle: textStyle,
+          textColor: const Color.fromRGBO(0, 0, 0, 0.9),
+          icon: FontAwesomeIcons.apple,
+          iconColor: Colors.black,
+          backgroundColor: const Color(0xFFFFFFFF),
+          onPressed: onPressed,
+          padding: padding,
+          shape: shape,
+          clipBehavior: clipBehavior,
+        );
       case Buttons.appleDark:
         return SignInButtonBuilder(
           elevation: elevation,
@@ -174,14 +196,10 @@ class SignInButton extends StatelessWidget {
           mini: mini,
           text: text ?? 'Sign in with Apple',
           textStyle: textStyle,
-          textColor: button == Buttons.apple
-              ? const Color.fromRGBO(0, 0, 0, 0.9)
-              : Colors.white,
+          textColor: Colors.white,
           icon: FontAwesomeIcons.apple,
-          iconColor: button == Buttons.apple ? Colors.black : Colors.white,
-          backgroundColor: button == Buttons.apple
-              ? const Color(0xFFFFFFFF)
-              : const Color(0xFF000000),
+          iconColor: Colors.white,
+          backgroundColor: const Color(0xFF000000),
           onPressed: onPressed,
           padding: padding,
           shape: shape,
