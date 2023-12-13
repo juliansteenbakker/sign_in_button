@@ -69,7 +69,7 @@ class SignInButton extends StatelessWidget {
           key: const ValueKey('Google'),
           text: text ?? 'Sign in with Google',
           textColor: button == Buttons.google
-              ? const Color.fromRGBO(0, 0, 0, 0.9)
+              ? const Color(0xFF000000),
               : const Color(0xFFFFFFFF),
           image: Container(
             margin: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
