@@ -118,10 +118,11 @@ class SignInButtonBuilder extends StatelessWidget {
         child: _getIconOrImage(),
       );
     }
+
+    final double buttonWidth = width ?? 220;
+
     return Container(
-      constraints: BoxConstraints(
-        maxWidth: width ?? 220,
-      ),
+      constraints: BoxConstraints(maxWidth: buttonWidth),
       child: Center(
         child: Row(
           children: <Widget>[
@@ -132,7 +133,13 @@ class SignInButtonBuilder extends StatelessWidget {
                   ),
               child: _getIconOrImage(),
             ),
-            Text(
+            Container(
+              constraints: BoxConstraints(
+                maxWidth: buttonWidth - 50,
+              ),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
               text,
               style: textStyle ??
                   TextStyle(
@@ -140,6 +147,8 @@ class SignInButtonBuilder extends StatelessWidget {
                     fontSize: fontSize,
                     backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
                   ),
+                ),
+              ),
             ),
           ],
         ),
