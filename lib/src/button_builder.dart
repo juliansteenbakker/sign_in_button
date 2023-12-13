@@ -20,11 +20,20 @@ class SignInButtonBuilder extends StatelessWidget {
   /// the button's text
   final String text;
 
+  /// Buttons's text style.
+  ///
+  /// This field is optional
+  final TextStyle? textStyle;
+
   /// The size of the label font
+  ///
+  /// This field will be overridden if [textStyle] is not null.
   final double fontSize;
 
   /// backgroundColor is required but textColor is default to `Colors.white`
   /// splashColor is default to `Colors.white30`
+  ///
+  /// [textColor] field will be overridden if [textStyle] is not null.
   final Color textColor;
   final Color iconColor;
   final Color backgroundColor;
@@ -78,6 +87,7 @@ class SignInButtonBuilder extends StatelessWidget {
     this.height,
     this.width,
     this.clipBehavior = Clip.none,
+    this.textStyle,
   }) : super(key: key);
 
   /// The build function will be help user to build the signin button widget.
@@ -130,8 +140,9 @@ class SignInButtonBuilder extends StatelessWidget {
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
-                  text,
-                  style: TextStyle(
+              text,
+              style: textStyle ??
+                  TextStyle(
                     color: textColor,
                     fontSize: fontSize,
                     backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
