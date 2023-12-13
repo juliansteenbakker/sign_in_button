@@ -29,7 +29,6 @@
 .pub-cache/
 .pub/
 /build/
-.pubspec.lock
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -47,3 +46,4 @@ ios/fastlane/report.xml
 ios/fastlane/Preview.html
 ios/fastlane/metadata/review_information
 ios/fastlane/metadata/trade_representative_contact_information
+/pubspec.lock
