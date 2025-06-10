@@ -3,53 +3,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sign_in_button/src/button_builder.dart';
 import 'package:sign_in_button/src/button_list.dart';
 
+/// A customizable button widget for various sign-in methods,
+/// based on predefined styles.
+///
+/// This widget simplifies the creation of common sign-in buttons
+/// (e.g., Google, Facebook) by providing pre-configured designs.
 class SignInButton extends StatefulWidget {
-  /// Here are the buttons builder which integrate with button builder
-  /// and the buttons list.
-  ///
-  /// The `SignInButton` class already contains general used buttons.
-  /// In case of other buttons, user can always use `SignInButtonBuilder`
-  /// to build the sign in button.
-
-  /// onPressed function should be passed in as a required field.
-  /// This function can be asynchronous, and the button will automatically
-  /// show a loading indicator while it's executing.
-  final Function() onPressed;
-
-  /// button should be used from the enum class `Buttons`
-  final Buttons button;
-
-  /// mini is a boolean field which specify whether to use a square mini button.
-  final bool mini;
-
-  /// shape is to specify the custom shape of the widget.
-  final ShapeBorder? shape;
-
-  /// overrides the default button text
-  final String? text;
-
-  /// overrides the default button padding
-  final EdgeInsets padding;
-
-  // overrides the default button elevation
-  final double elevation;
-
-  /// buttons's text style.
-  final TextStyle? textStyle;
-
-  /// {@macro flutter.material.Material.clipBehavior}
-  ///
-  /// Defaults to [Clip.none], and must not be null.
-  final Clip clipBehavior;
-
-  /// The color of the loading indicator. This will be passed to [SignInButtonBuilder].
-  final Color? loadingIndicatorColor;
-
   /// The constructor is fairly self-explanatory.
   const SignInButton(
     this.button, {
-    Key? key,
     required this.onPressed,
+    Key? key,
     this.mini = false,
     this.padding = EdgeInsets.zero,
     this.shape,
@@ -67,10 +31,66 @@ class SignInButton extends StatefulWidget {
         ),
         super(key: key);
 
+  /// The callback function to be called when the button is pressed.
+  ///
+  /// This function can be `async`. The button will automatically display a
+  /// loading indicator while the `onPressed` function is executing.
+  final dynamic Function() onPressed;
+
+  /// The type of sign-in button to display, chosen from the `Buttons` enum.
+  final Buttons button;
+
+  /// If `true`, the button will be displayed in a compact, icon-only mini
+  /// style.
+  ///
+  /// Defaults to `false`. Not all button types support mini mode
+  /// (e.g., Google, FacebookNew).
+  final bool mini;
+
+  /// The custom shape of the button.
+  ///
+  /// If not provided, the button will use the default shape from the current
+  /// [ButtonTheme].
+  final ShapeBorder? shape;
+
+  /// An optional text to override the default text for the button.
+  ///
+  /// If `null`, the button will display its default text
+  /// (e.g., "Sign in with Google").
+  final String? text;
+
+  /// The padding around the entire button.
+  ///
+  /// Defaults to `EdgeInsets.zero`.
+  final EdgeInsets padding;
+
+  /// The z-coordinate at which to place this button relative to its parent.
+  ///
+  /// Defaults to `2.0`.
+  final double elevation;
+
+  /// The text style for the button's [text].
+  ///
+  /// If provided, this will override the default text style for the chosen
+  /// button.
+  final TextStyle? textStyle;
+
+  /// {@macro flutter.material.Material.clipBehavior}
+  ///
+  /// Defaults to [Clip.none], and must not be null.
+  final Clip clipBehavior;
+
+  /// The color of the loading indicator displayed when the button's [onPressed]
+  /// function is executing.
+  ///
+  /// If `null`, a default color appropriate for the button style will be used.
+  final Color? loadingIndicatorColor;
+
   @override
   SignInButtonState createState() => SignInButtonState();
 }
 
+/// The state for a [SignInButton].
 class SignInButtonState extends State<SignInButton> {
   bool _isLoading = false;
 
@@ -112,9 +132,9 @@ class SignInButtonState extends State<SignInButton> {
               ? const Color(0xFF1F1F1F)
               : const Color(0xFFE3E3E3),
           image: Container(
-            margin: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+            margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(8),
               child: Image(
                 image: AssetImage(
                   widget.button == Buttons.google
@@ -122,7 +142,7 @@ class SignInButtonState extends State<SignInButton> {
                       : 'assets/logos/google_dark.png',
                   package: 'sign_in_button',
                 ),
-                height: 36.0,
+                height: 36,
               ),
             ),
           ),
@@ -133,7 +153,7 @@ class SignInButtonState extends State<SignInButton> {
           padding: widget.padding,
           innerPadding: EdgeInsets.zero,
           shape: widget.shape,
-          height: 36.0,
+          height: 36,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading, // Pass internal state
           loadingIndicatorColor: widget.loadingIndicatorColor ??
@@ -155,7 +175,7 @@ class SignInButtonState extends State<SignInButton> {
                       'assets/logos/facebook_new.png',
                       package: 'sign_in_button',
                     ),
-                    height: 24.0,
+                    height: 24,
                   ),
                 )
               : null,
@@ -382,13 +402,12 @@ class SignInButtonState extends State<SignInButton> {
           onPressed: _handleOnPressed,
           padding: widget.padding,
           shape: widget.shape,
-          height: 36.0,
+          height: 36,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
           loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.grey,
         );
       case Buttons.email:
-      default:
         return SignInButtonBuilder(
           elevation: widget.elevation,
           key: const ValueKey('Email'),

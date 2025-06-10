@@ -1,89 +1,18 @@
 import 'package:flutter/material.dart';
 
+/// A customizable button widget for various sign-in methods.
+///
+/// This widget provides a flexible way to create sign-in buttons with options
+/// for icons, images, text, and loading indicators. It supports both full-width
+/// and mini (icon-only) styles.
 @immutable
 class SignInButtonBuilder extends StatelessWidget {
-  /// This is a builder class for signin button
-  ///
-  /// Icon can be used to define the signin method
-  /// User can use Flutter built-in Icons or font-awesome flutter's Icon
-  final IconData? icon;
-
-  /// Override the icon section with a image logo
-  /// For example, Google requires a colorized logo,
-  /// which FontAwesome cannot display. If both image
-  /// and icon are provided, image will take precedence
-  final Widget? image;
-
-  /// `mini` tag is used to switch from a full-width signin button to
-  final bool mini;
-
-  /// the button's text
-  final String text;
-
-  /// Buttons's text style.
-  ///
-  /// This field is optional
-  final TextStyle? textStyle;
-
-  /// The size of the label font
-  ///
-  /// This field will be overridden if [textStyle] is not null.
-  final double fontSize;
-
-  /// backgroundColor is required but textColor is default to `Colors.white`
-  /// splashColor is default to `Colors.white30`
-  ///
-  /// [textColor] field will be overridden if [textStyle] is not null.
-  final Color textColor;
-  final Color iconColor;
-  final Color backgroundColor;
-  final Color splashColor;
-  final Color highlightColor;
-
-  /// onPressed should be specified as a required field to indicate the callback.
-  final Function onPressed;
-
-  /// padding is default to `EdgeInsets.all(3.0)`
-  final EdgeInsets? padding;
-  final EdgeInsets? innerPadding;
-
-  /// shape is to specify the custom shape of the widget.
-  /// However the flutter widgets contains restriction or bug
-  /// on material button, hence, comment out.
-  final ShapeBorder? shape;
-
-  /// elevation has default value of 2.0
-  final double elevation;
-
-  /// the height of the button
-  final double? height;
-
-  /// width is default to be 1/1.5 of the screen
-  final double? width;
-
-  /// {@macro flutter.material.Material.clipBehavior}
-  ///
-  /// Defaults to [Clip.none], and must not be null.
-  final Clip clipBehavior;
-
-  /// Indicates if the button is in a loading state.
-  final bool isLoading;
-
-  /// The color of the loading indicator. Defaults to [Colors.white].
-  final Color? loadingIndicatorColor;
-
-  /// The duration of the animation when switching between content and loading state.
-  final Duration animationDuration;
-
-  /// The curve of the animation when switching between content and loading state.
-  final Curve animationCurve;
-
   /// The constructor is self-explanatory.
   const SignInButtonBuilder({
-    Key? key,
     required this.backgroundColor,
     required this.onPressed,
     required this.text,
+    Key? key,
     this.icon,
     this.image,
     this.fontSize = 14.0,
@@ -106,7 +35,128 @@ class SignInButtonBuilder extends StatelessWidget {
     this.animationCurve = Curves.easeInOut,
   }) : super(key: key);
 
-  /// The build function will be help user to build the signin button widget.
+  /// An optional [IconData] to display as the button's icon.
+  ///
+  /// This can be a Flutter built-in [Icons] or an icon from a package like
+  /// `font_awesome_flutter`. If [image] is also provided, [image] will take
+  /// precedence.
+  final IconData? icon;
+
+  /// An optional [Widget] to display as the button's logo, overriding [icon].
+  ///
+  /// This is useful for logos that require specific coloring or complex designs
+  /// that cannot be achieved with an [IconData], such as the Google logo.
+  final Widget? image;
+
+  /// If `true`, the button will be displayed in a compact, icon-only mini
+  /// style.
+  ///
+  /// Defaults to `false`, displaying a full-width button with text and an
+  /// icon/image.
+  final bool mini;
+
+  /// The text displayed on the button.
+  final String text;
+
+  /// The text style for the button's [text].
+  ///
+  /// If provided, this will override [fontSize] and [textColor].
+  final TextStyle? textStyle;
+
+  /// The font size of the button's [text].
+  ///
+  /// Defaults to `14.0`. This field will be overridden if [textStyle] is not
+  /// null.
+  final double fontSize;
+
+  /// The color of the button's [text].
+  ///
+  /// Defaults to `Colors.white`. This field will be overridden if [textStyle]
+  /// is not null.
+  final Color textColor;
+
+  /// The color of the [icon].
+  ///
+  /// Defaults to `Colors.white`. This color only applies if an [icon] is used.
+  final Color iconColor;
+
+  /// The background color of the button.
+  final Color backgroundColor;
+
+  /// The color of the ink splash effect when the button is pressed.
+  ///
+  /// Defaults to `Colors.white30`.
+  final Color splashColor;
+
+  /// The color of the highlight when the button is pressed.
+  ///
+  /// Defaults to `Colors.white30`.
+  final Color highlightColor;
+
+  /// The callback function to be called when the button is pressed.
+  ///
+  /// If [isLoading] is `true`, this callback will be disabled.
+  final Function onPressed;
+
+  /// The padding around the entire button.
+  ///
+  /// Defaults to `EdgeInsets.zero`.
+  final EdgeInsets? padding;
+
+  /// The inner padding between the icon/image and the text.
+  ///
+  /// Defaults to `EdgeInsets.symmetric(horizontal: 13)`.
+  final EdgeInsets? innerPadding;
+
+  /// The custom shape of the button.
+  ///
+  /// If not provided, the button will use the default shape from the current
+  /// [ButtonTheme].
+  final ShapeBorder? shape;
+
+  /// The z-coordinate at which to place this button relative to its parent.
+  ///
+  /// Defaults to `2.0`.
+  final double elevation;
+
+  /// The height of the button.
+  ///
+  /// If `mini` is `true`, this will also affect the size of the icon container.
+  final double? height;
+
+  /// The width of the button.
+  ///
+  /// If `mini` is `true`, this will also affect the size of the icon container.
+  /// For full-width buttons, the default is approximately 220 pixels.
+  final double? width;
+
+  /// {@macro flutter.material.Material.clipBehavior}
+  ///
+  /// Defaults to [Clip.none], and must not be null.
+  final Clip clipBehavior;
+
+  /// If `true`, a loading indicator will be shown instead of the button
+  /// content, and [onPressed] will be disabled.
+  final bool isLoading;
+
+  /// The color of the [CircularProgressIndicator] shown when [isLoading] is
+  /// `true`.
+  ///
+  /// Defaults to `Colors.white`.
+  final Color? loadingIndicatorColor;
+
+  /// The duration of the animation when switching between the button content
+  /// and the loading indicator.
+  ///
+  /// Defaults to `Duration(milliseconds: 300)`.
+  final Duration animationDuration;
+
+  /// The curve of the animation when switching between the button content
+  /// and the loading indicator.
+  ///
+  /// Defaults to `Curves.easeInOut`.
+  final Curve animationCurve;
+
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
@@ -156,7 +206,7 @@ class SignInButtonBuilder extends StatelessWidget {
       );
     }
 
-    final double buttonWidth = width ?? 220;
+    final buttonWidth = width ?? 220;
 
     return Container(
       key: const ValueKey(

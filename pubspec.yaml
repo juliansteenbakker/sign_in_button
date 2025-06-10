@@ -4,7 +4,7 @@ homepage: https://github.com/juliansteenbakker/sign_in_button
 version: 3.2.0
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.12.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -14,7 +14,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lint: ^2.0.1
+  very_good_analysis: ^8.0.0
 
 flutter:
   uses-material-design: true

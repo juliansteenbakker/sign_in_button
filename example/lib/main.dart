@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData.light(),
       home: const Scaffold(
-        backgroundColor: Color.fromRGBO(50, 50, 50, 1.0),
+        backgroundColor: Color.fromRGBO(50, 50, 50, 1),
         body: SignInPage(),
       ),
       debugShowCheckedModeBanner: false,
@@ -51,7 +51,7 @@ class SignInPage extends StatelessWidget {
               _showButtonPressDialog(context, 'Email');
             },
             backgroundColor: Colors.blueGrey[700]!,
-            width: 220.0,
+            width: 220,
           ),
           const Divider(),
           SignInButton(
@@ -100,9 +100,9 @@ class SignInPage extends StatelessWidget {
           const Divider(),
           SignInButton(
             Buttons.twitter,
-            text: 'Use Twitter',
+            text: 'Use Twitter with delay',
             onPressed: () async {
-              await Future.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(const Duration(seconds: 1));
               if (!context.mounted) return;
               _showButtonPressDialog(context, 'Twitter');
             },
@@ -115,9 +115,9 @@ class SignInPage extends StatelessWidget {
                 Buttons.linkedIn,
                 mini: true,
                 onPressed: () async {
-                  await Future.delayed(const Duration(seconds: 1));
+                  await Future<void>.delayed(const Duration(seconds: 1));
                   if (!context.mounted) return;
-                  _showButtonPressDialog(context, 'LinkedIn (mini)');
+                  _showButtonPressDialog(context, 'LinkedIn (mini) with delay');
                 },
               ),
               SignInButton(

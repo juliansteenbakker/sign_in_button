@@ -11,7 +11,7 @@ Add to pubspec.yaml.
 ```yaml
 dependencies:
   ...
-  sign_in_button: ^3.0.0
+  sign_in_button: ^4.0.0
 ```
 
 ## Usage Example
