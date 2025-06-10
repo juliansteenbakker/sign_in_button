@@ -107,6 +107,15 @@ class SignInPage extends StatelessWidget {
               _showButtonPressDialog(context, 'Twitter');
             },
           ),
+          SignInButton(
+            Buttons.x,
+            text: 'Use X (Twitter) with delay',
+            onPressed: () async {
+              await Future<void>.delayed(const Duration(seconds: 1));
+              if (!context.mounted) return;
+              _showButtonPressDialog(context, 'X');
+            },
+          ),
           const Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -142,6 +151,13 @@ class SignInPage extends StatelessWidget {
                   _showButtonPressDialog(context, 'Email (mini)');
                 },
                 backgroundColor: Colors.cyan,
+              ),
+              SignInButton(
+                Buttons.x,
+                mini: true,
+                onPressed: () {
+                  _showButtonPressDialog(context, 'X (mini)');
+                },
               ),
             ],
           ),

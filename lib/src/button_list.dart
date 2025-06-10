@@ -36,6 +36,9 @@ enum Buttons {
   /// Represents a Twitter button.
   twitter,
 
+  /// Represents a X (formerly Twitter) button.
+  x,
+
   /// Represents a Reddit button.
   reddit,
 

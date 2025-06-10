@@ -297,6 +297,22 @@ class SignInButtonState extends State<SignInButton> {
           isLoading: _isLoading,
           loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
+      case Buttons.x:
+        return SignInButtonBuilder(
+          elevation: widget.elevation,
+          key: const ValueKey('X'),
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with X',
+          textStyle: widget.textStyle,
+          icon: FontAwesomeIcons.xTwitter,
+          backgroundColor: const Color(0xFF000000),
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+        );
       case Buttons.reddit:
         return SignInButtonBuilder(
           elevation: widget.elevation,
