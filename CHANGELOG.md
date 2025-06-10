@@ -1,3 +1,8 @@
+## 4.0.1
+New Features:
+- Changed minimum version of font_awesome_flutter to 10.6.0 in order to support X (formerly Twitter).
+- Removed default progress indicator color
+
 ## 4.0.0
 New Features:
 - Adds a circular progress indicator for loading state. This will only happen when onPressed is async

@@ -156,8 +156,7 @@ class SignInButtonState extends State<SignInButton> {
           height: 36,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading, // Pass internal state
-          loadingIndicatorColor: widget.loadingIndicatorColor ??
-              (widget.button == Buttons.google ? Colors.blue : Colors.white),
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.facebook:
       case Buttons.facebookNew:
@@ -190,7 +189,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.gitHub:
         return SignInButtonBuilder(
@@ -206,7 +205,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.apple:
       case Buttons.appleDark:
@@ -230,8 +229,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ??
-              (widget.button == Buttons.apple ? Colors.black : Colors.white),
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.linkedIn:
         return SignInButtonBuilder(
@@ -247,7 +245,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.pinterest:
         return SignInButtonBuilder(
@@ -263,7 +261,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.tumblr:
         return SignInButtonBuilder(
@@ -279,7 +277,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.twitter:
         return SignInButtonBuilder(
@@ -295,7 +293,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.x:
         return SignInButtonBuilder(
@@ -311,7 +309,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.reddit:
         return SignInButtonBuilder(
@@ -327,7 +325,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.quora:
         return SignInButtonBuilder(
@@ -342,7 +340,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.yahoo:
         return SignInButtonBuilder(
@@ -357,7 +355,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.hotmail:
         return SignInButtonBuilder(
@@ -372,7 +370,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.xbox:
         return SignInButtonBuilder(
@@ -387,7 +385,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.microsoft:
         return SignInButtonBuilder(
@@ -402,7 +400,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.anonymous:
         return SignInButtonBuilder(
@@ -421,7 +419,7 @@ class SignInButtonState extends State<SignInButton> {
           height: 36,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.grey,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
       case Buttons.email:
         return SignInButtonBuilder(
@@ -437,7 +435,7 @@ class SignInButtonState extends State<SignInButton> {
           shape: widget.shape,
           clipBehavior: widget.clipBehavior,
           isLoading: _isLoading,
-          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
+          loadingIndicatorColor: widget.loadingIndicatorColor,
         );
     }
   }

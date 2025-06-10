@@ -257,8 +257,7 @@ class SignInButtonBuilder extends StatelessWidget {
       height: mini ? (width ?? 24.0) : 24.0,
       child: CircularProgressIndicator(
         strokeWidth: 2,
-        valueColor: AlwaysStoppedAnimation<Color>(
-            loadingIndicatorColor ?? Colors.white),
+        color: loadingIndicatorColor,
       ),
     );
   }
