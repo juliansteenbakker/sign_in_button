@@ -66,6 +66,18 @@ class SignInButtonBuilder extends StatelessWidget {
   /// Defaults to [Clip.none], and must not be null.
   final Clip clipBehavior;
 
+  /// Indicates if the button is in a loading state.
+  final bool isLoading;
+
+  /// The color of the loading indicator. Defaults to [Colors.white].
+  final Color? loadingIndicatorColor;
+
+  /// The duration of the animation when switching between content and loading state.
+  final Duration animationDuration;
+
+  /// The curve of the animation when switching between content and loading state.
+  final Curve animationCurve;
+
   /// The constructor is self-explanatory.
   const SignInButtonBuilder({
     Key? key,
@@ -88,6 +100,10 @@ class SignInButtonBuilder extends StatelessWidget {
     this.width,
     this.clipBehavior = Clip.none,
     this.textStyle,
+    this.isLoading = false,
+    this.loadingIndicatorColor,
+    this.animationDuration = const Duration(milliseconds: 300),
+    this.animationCurve = Curves.easeInOut,
   }) : super(key: key);
 
   /// The build function will be help user to build the signin button widget.
@@ -100,19 +116,40 @@ class SignInButtonBuilder extends StatelessWidget {
       elevation: elevation,
       padding: padding ?? EdgeInsets.zero,
       color: backgroundColor,
-      onPressed: onPressed as void Function()?,
+      onPressed: isLoading ? null : onPressed as void Function()?,
       splashColor: splashColor,
       highlightColor: highlightColor,
       shape: shape ?? ButtonTheme.of(context).shape,
       clipBehavior: clipBehavior,
-      child: _getButtonChild(context),
+      child: _getAnimatedButtonChild(context),
     );
   }
 
-  /// Get the inner content of a button
-  Widget _getButtonChild(BuildContext context) {
+  /// Get the animated inner content of a button
+  Widget _getAnimatedButtonChild(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: animationDuration,
+      switchInCurve: animationCurve,
+      switchOutCurve: animationCurve,
+      transitionBuilder: (Widget child, Animation<double> animation) {
+        return ScaleTransition(
+          scale: animation,
+          child: FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+        );
+      },
+      child: isLoading ? _getLoadingIndicator() : _getButtonContent(context),
+    );
+  }
+
+  /// Get the inner content of a button (excluding the loading indicator)
+  Widget _getButtonContent(BuildContext context) {
     if (mini) {
       return SizedBox(
+        key: const ValueKey(
+            'button_icon_mini'), // Add a key for AnimatedSwitcher
         width: height ?? 35.0,
         height: width ?? 35.0,
         child: _getIconOrImage(),
@@ -122,9 +159,12 @@ class SignInButtonBuilder extends StatelessWidget {
     final double buttonWidth = width ?? 220;
 
     return Container(
+      key: const ValueKey(
+          'button_content_full'), // Add a key for AnimatedSwitcher
       constraints: BoxConstraints(maxWidth: buttonWidth),
       child: Center(
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Padding(
               padding: innerPadding ??
@@ -152,6 +192,23 @@ class SignInButtonBuilder extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  /// Get the loading indicator widget
+  Widget _getLoadingIndicator() {
+    return SizedBox(
+      key:
+          const ValueKey('loading_indicator'), // Add a key for AnimatedSwitcher
+      width: mini
+          ? (height ?? 24.0)
+          : 24.0, // Smaller indicator for mini, standard for full
+      height: mini ? (width ?? 24.0) : 24.0,
+      child: CircularProgressIndicator(
+        strokeWidth: 2,
+        valueColor: AlwaysStoppedAnimation<Color>(
+            loadingIndicatorColor ?? Colors.white),
       ),
     );
   }

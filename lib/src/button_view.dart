@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sign_in_button/src/button_builder.dart';
 import 'package:sign_in_button/src/button_list.dart';
 
-class SignInButton extends StatelessWidget {
+class SignInButton extends StatefulWidget {
   /// Here are the buttons builder which integrate with button builder
   /// and the buttons list.
   ///
@@ -12,7 +12,9 @@ class SignInButton extends StatelessWidget {
   /// to build the sign in button.
 
   /// onPressed function should be passed in as a required field.
-  final Function onPressed;
+  /// This function can be asynchronous, and the button will automatically
+  /// show a loading indicator while it's executing.
+  final Function() onPressed;
 
   /// button should be used from the enum class `Buttons`
   final Buttons button;
@@ -40,6 +42,9 @@ class SignInButton extends StatelessWidget {
   /// Defaults to [Clip.none], and must not be null.
   final Clip clipBehavior;
 
+  /// The color of the loading indicator. This will be passed to [SignInButtonBuilder].
+  final Color? loadingIndicatorColor;
+
   /// The constructor is fairly self-explanatory.
   const SignInButton(
     this.button, {
@@ -52,6 +57,7 @@ class SignInButton extends StatelessWidget {
     this.elevation = 2.0,
     this.clipBehavior = Clip.none,
     this.textStyle,
+    this.loadingIndicatorColor,
   })  : assert(
           mini != true ||
               !(button == Buttons.google ||
@@ -61,19 +67,48 @@ class SignInButton extends StatelessWidget {
         ),
         super(key: key);
 
-  /// The build function is used to build the widget which will switch to
-  /// desired widget based on the enum class `Buttons`
+  @override
+  SignInButtonState createState() => SignInButtonState();
+}
+
+class SignInButtonState extends State<SignInButton> {
+  bool _isLoading = false;
+
+  // This internal function will handle the execution of onPressed
+  // and manage the loading state.
+  Future<void> _handleOnPressed() async {
+    if (_isLoading) {
+      return; // Prevent multiple presses or if onPressed is null
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await widget.onPressed.call(); // Execute the user's onPressed function
+    } finally {
+      // Ensure loading state is reset even if an error occurs
+      if (mounted) {
+        // Check if the widget is still in the tree
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    switch (button) {
+    switch (widget.button) {
       case Buttons.google:
       case Buttons.googleDark:
         return SignInButtonBuilder(
-          elevation: elevation,
+          elevation: widget.elevation,
           key: const ValueKey('Google'),
-          text: text ?? 'Sign in with Google',
-          textStyle: textStyle,
-          textColor: button == Buttons.google
+          text: widget.text ?? 'Sign in with Google',
+          textStyle: widget.textStyle,
+          textColor: widget.button == Buttons.google
               ? const Color(0xFF1F1F1F)
               : const Color(0xFFE3E3E3),
           image: Container(
@@ -82,7 +117,7 @@ class SignInButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               child: Image(
                 image: AssetImage(
-                  button == Buttons.google
+                  widget.button == Buttons.google
                       ? 'assets/logos/google_light.png'
                       : 'assets/logos/google_dark.png',
                   package: 'sign_in_button',
@@ -91,26 +126,29 @@ class SignInButton extends StatelessWidget {
               ),
             ),
           ),
-          backgroundColor: button == Buttons.google
+          backgroundColor: widget.button == Buttons.google
               ? const Color(0xFFFFFFFF)
               : const Color(0xFF4285F4),
-          onPressed: onPressed,
-          padding: padding,
+          onPressed: _handleOnPressed, // Use the wrapped handler
+          padding: widget.padding,
           innerPadding: EdgeInsets.zero,
-          shape: shape,
+          shape: widget.shape,
           height: 36.0,
-          clipBehavior: clipBehavior,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading, // Pass internal state
+          loadingIndicatorColor: widget.loadingIndicatorColor ??
+              (widget.button == Buttons.google ? Colors.blue : Colors.white),
         );
       case Buttons.facebook:
       case Buttons.facebookNew:
         return SignInButtonBuilder(
-          elevation: elevation,
+          elevation: widget.elevation,
           key: const ValueKey('Facebook'),
-          mini: mini,
-          text: text ?? 'Sign in with Facebook',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Facebook',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.facebookF,
-          image: button == Buttons.facebookNew
+          image: widget.button == Buttons.facebookNew
               ? const ClipRRect(
                   child: Image(
                     image: AssetImage(
@@ -121,218 +159,250 @@ class SignInButton extends StatelessWidget {
                   ),
                 )
               : null,
-          backgroundColor: button == Buttons.facebookNew
+          backgroundColor: widget.button == Buttons.facebookNew
               ? const Color(0xFF1877f2)
               : const Color(0xFF3B5998),
-          innerPadding: button == Buttons.facebookNew
+          innerPadding: widget.button == Buttons.facebookNew
               ? const EdgeInsets.fromLTRB(12, 0, 11, 0)
               : null,
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.gitHub:
         return SignInButtonBuilder(
-          elevation: elevation,
+          elevation: widget.elevation,
           key: const ValueKey('GitHub'),
-          mini: mini,
-          text: text ?? 'Sign in with GitHub',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with GitHub',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.github,
           backgroundColor: const Color(0xFF444444),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.apple:
       case Buttons.appleDark:
         return SignInButtonBuilder(
-          elevation: elevation,
+          elevation: widget.elevation,
           key: const ValueKey('Apple'),
-          mini: mini,
-          text: text ?? 'Sign in with Apple',
-          textStyle: textStyle,
-          textColor: button == Buttons.apple
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Apple',
+          textStyle: widget.textStyle,
+          textColor: widget.button == Buttons.apple
               ? const Color.fromRGBO(0, 0, 0, 0.9)
               : Colors.white,
           icon: FontAwesomeIcons.apple,
-          iconColor: button == Buttons.apple ? Colors.black : Colors.white,
-          backgroundColor: button == Buttons.apple
+          iconColor:
+              widget.button == Buttons.apple ? Colors.black : Colors.white,
+          backgroundColor: widget.button == Buttons.apple
               ? const Color(0xFFFFFFFF)
               : const Color(0xFF000000),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ??
+              (widget.button == Buttons.apple ? Colors.black : Colors.white),
         );
       case Buttons.linkedIn:
         return SignInButtonBuilder(
-          elevation: elevation,
+          elevation: widget.elevation,
           key: const ValueKey('LinkedIn'),
-          mini: mini,
-          text: text ?? 'Sign in with LinkedIn',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with LinkedIn',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.linkedinIn,
           backgroundColor: const Color(0xFF007BB6),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.pinterest:
         return SignInButtonBuilder(
-          elevation: elevation,
+          elevation: widget.elevation,
           key: const ValueKey('Pinterest'),
-          mini: mini,
-          text: text ?? 'Sign in with Pinterest',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Pinterest',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.pinterest,
           backgroundColor: const Color(0xFFCB2027),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.tumblr:
         return SignInButtonBuilder(
-          elevation: elevation,
+          elevation: widget.elevation,
           key: const ValueKey('Tumblr'),
-          mini: mini,
-          text: text ?? 'Sign in with Tumblr',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Tumblr',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.tumblr,
           backgroundColor: const Color(0xFF34526f),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.twitter:
         return SignInButtonBuilder(
-          elevation: elevation,
+          elevation: widget.elevation,
           key: const ValueKey('Twitter'),
-          mini: mini,
-          text: text ?? 'Sign in with Twitter',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Twitter',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.twitter,
           backgroundColor: const Color(0xFF1DA1F2),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.reddit:
         return SignInButtonBuilder(
-          elevation: elevation,
+          elevation: widget.elevation,
           key: const ValueKey('Reddit'),
-          mini: mini,
-          text: text ?? 'Sign in with Reddit',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Reddit',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.reddit,
           backgroundColor: const Color(0xFFFF4500),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.quora:
         return SignInButtonBuilder(
           key: const ValueKey('Quora'),
-          mini: mini,
-          text: text ?? 'Sign in with Quora',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Quora',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.quora,
           backgroundColor: const Color(0x00a40a00),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.yahoo:
         return SignInButtonBuilder(
           key: const ValueKey('Yahoo'),
-          mini: mini,
-          text: text ?? 'Sign in with Yahoo',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Yahoo',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.yahoo,
           backgroundColor: const Color(0x006001d2),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.hotmail:
         return SignInButtonBuilder(
           key: const ValueKey('Hotmail'),
-          mini: mini,
-          text: text ?? 'Sign in with Hotmail',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Hotmail',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.commentSms,
           backgroundColor: const Color(0x000072c6),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.xbox:
         return SignInButtonBuilder(
           key: const ValueKey('Xbox'),
-          mini: mini,
-          text: text ?? 'Sign in with Xbox',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Xbox',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.xbox,
           backgroundColor: const Color(0x00107c0f),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.microsoft:
         return SignInButtonBuilder(
           key: const ValueKey('Microsoft'),
-          mini: mini,
-          text: text ?? 'Sign in with Microsoft',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Microsoft',
+          textStyle: widget.textStyle,
           icon: FontAwesomeIcons.microsoft,
           backgroundColor: const Color(0xff235A9F),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
       case Buttons.anonymous:
         return SignInButtonBuilder(
-          elevation: elevation,
+          elevation: widget.elevation,
           key: const ValueKey('Anonymous'),
-          mini: mini,
-          text: text ?? 'Anonymous',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Anonymous',
+          textStyle: widget.textStyle,
           textColor: const Color.fromRGBO(0, 0, 0, 0.9),
           icon: Icons.account_circle,
           iconColor: Colors.grey,
           backgroundColor: const Color(0xFFFFFFFF),
-          onPressed: onPressed,
-          padding: padding,
-          shape: shape,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
+          shape: widget.shape,
           height: 36.0,
-          clipBehavior: clipBehavior,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.grey,
         );
       case Buttons.email:
       default:
         return SignInButtonBuilder(
-          elevation: elevation,
+          elevation: widget.elevation,
           key: const ValueKey('Email'),
-          mini: mini,
-          text: text ?? 'Sign in with Email',
-          textStyle: textStyle,
+          mini: widget.mini,
+          text: widget.text ?? 'Sign in with Email',
+          textStyle: widget.textStyle,
           icon: Icons.email,
-          onPressed: onPressed,
-          padding: padding,
+          onPressed: _handleOnPressed,
+          padding: widget.padding,
           backgroundColor: Colors.grey[700]!,
-          shape: shape,
-          clipBehavior: clipBehavior,
+          shape: widget.shape,
+          clipBehavior: widget.clipBehavior,
+          isLoading: _isLoading,
+          loadingIndicatorColor: widget.loadingIndicatorColor ?? Colors.white,
         );
     }
   }

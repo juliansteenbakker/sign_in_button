@@ -27,6 +27,7 @@ class SignInPage extends StatelessWidget {
 
   /// Show a simple "___ Button Pressed" indicator
   void _showButtonPressDialog(BuildContext context, String provider) {
+    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('$provider Button Pressed!'),
@@ -100,7 +101,9 @@ class SignInPage extends StatelessWidget {
           SignInButton(
             Buttons.twitter,
             text: 'Use Twitter',
-            onPressed: () {
+            onPressed: () async {
+              await Future.delayed(const Duration(seconds: 1));
+              if (!context.mounted) return;
               _showButtonPressDialog(context, 'Twitter');
             },
           ),
@@ -111,7 +114,9 @@ class SignInPage extends StatelessWidget {
               SignInButton(
                 Buttons.linkedIn,
                 mini: true,
-                onPressed: () {
+                onPressed: () async {
+                  await Future.delayed(const Duration(seconds: 1));
+                  if (!context.mounted) return;
                   _showButtonPressDialog(context, 'LinkedIn (mini)');
                 },
               ),
