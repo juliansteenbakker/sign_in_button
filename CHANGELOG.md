@@ -1,3 +1,12 @@
+## 4.0.0
+New Features:
+- Adds a circular progress indicator for loading state. This will only happen when onPressed is async
+and executing.
+- Added X (Formerly Twitter) to the button list.
+- Updated Google button text color to be inline with design specs.
+- Added textStyle field for button text.
+- Scale down button text if needed to prevent text overflow.
+
 ## 3.2.0
 Added clipBehavior property to customize the button's clipping. (Thanks @sarbogast !)
 
