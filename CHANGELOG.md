@@ -1,3 +1,6 @@
+## 4.1.0
+- Added support for font_awesome_flutter v10
+
 ## 4.0.1
 New Features:
 - Changed minimum version of font_awesome_flutter to 10.6.0 in order to support X (formerly Twitter).
