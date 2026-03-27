@@ -49,3 +49,5 @@ ios/fastlane/metadata/review_information
 ios/fastlane/metadata/trade_representative_contact_information
 /example/android/app/.cxx/
 /example/android/build/reports/problems/problems-report.html
+/example/ios/Flutter/ephemeral/flutter_lldbinit
+/example/ios/Flutter/ephemeral/flutter_lldb_helper.py
