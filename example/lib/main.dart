@@ -40,11 +40,12 @@ class SignInPage extends StatelessWidget {
   /// Normally the signin buttons should be contained in the SignInPage
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          SignInButtonBuilder(
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 24),
+      children: <Widget>[
+        // Custom button via SignInButtonBuilder
+        Center(
+          child: SignInButtonBuilder(
             text: 'Get going with Email',
             icon: Icons.email,
             onPressed: () {
@@ -53,52 +54,87 @@ class SignInPage extends StatelessWidget {
             backgroundColor: Colors.blueGrey[700]!,
             width: 220,
           ),
-          const Divider(),
-          SignInButton(
+        ),
+        const Divider(),
+
+        // Google
+        Center(
+          child: SignInButton(
             Buttons.google,
             onPressed: () {
               _showButtonPressDialog(context, 'Google');
             },
           ),
-          const Divider(),
-          SignInButton(
+        ),
+        const Divider(),
+        Center(
+          child: SignInButton(
             Buttons.googleDark,
             onPressed: () {
               _showButtonPressDialog(context, 'Google (dark)');
             },
           ),
-          const Divider(),
-          SignInButton(
+        ),
+        const Divider(),
+
+        // Facebook
+        Center(
+          child: SignInButton(
             Buttons.facebookNew,
             onPressed: () {
               _showButtonPressDialog(context, 'FacebookNew');
             },
           ),
-          const Divider(),
-          SignInButton(
+        ),
+        const Divider(),
+
+        // Apple
+        Center(
+          child: SignInButton(
             Buttons.apple,
             onPressed: () {
               _showButtonPressDialog(context, 'Apple');
             },
           ),
-          const Divider(),
-          SignInButton(
+        ),
+        const Divider(),
+        Center(
+          child: SignInButton(
+            Buttons.appleDark,
+            onPressed: () {
+              _showButtonPressDialog(context, 'Apple (dark)');
+            },
+          ),
+        ),
+        const Divider(),
+
+        // GitHub
+        Center(
+          child: SignInButton(
             Buttons.gitHub,
             text: 'Sign up with GitHub',
             onPressed: () {
               _showButtonPressDialog(context, 'Github');
             },
           ),
-          const Divider(),
-          SignInButton(
+        ),
+        const Divider(),
+
+        // Microsoft
+        Center(
+          child: SignInButton(
             Buttons.microsoft,
-            text: 'Sign up with Microsoft ',
+            text: 'Sign up with Microsoft',
             onPressed: () {
-              _showButtonPressDialog(context, 'Microsoft ');
+              _showButtonPressDialog(context, 'Microsoft');
             },
           ),
-          const Divider(),
-          SignInButton(
+        ),
+        const Divider(),
+
+        // Twitter / X
+        Center(
+          child: SignInButton(
             Buttons.twitter,
             text: 'Use Twitter with delay',
             onPressed: () async {
@@ -107,7 +143,9 @@ class SignInPage extends StatelessWidget {
               _showButtonPressDialog(context, 'Twitter');
             },
           ),
-          SignInButton(
+        ),
+        Center(
+          child: SignInButton(
             Buttons.x,
             text: 'Use X (Twitter) with delay',
             onPressed: () async {
@@ -116,53 +154,165 @@ class SignInPage extends StatelessWidget {
               _showButtonPressDialog(context, 'X');
             },
           ),
-          const Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SignInButton(
-                Buttons.linkedIn,
-                mini: true,
-                onPressed: () async {
-                  await Future<void>.delayed(const Duration(seconds: 1));
-                  if (!context.mounted) return;
-                  _showButtonPressDialog(context, 'LinkedIn (mini) with delay');
-                },
-              ),
-              SignInButton(
-                Buttons.tumblr,
-                mini: true,
-                onPressed: () {
-                  _showButtonPressDialog(context, 'Tumblr (mini)');
-                },
-              ),
-              SignInButton(
-                Buttons.facebook,
-                mini: true,
-                onPressed: () {
-                  _showButtonPressDialog(context, 'Facebook (mini)');
-                },
-              ),
-              SignInButtonBuilder(
-                icon: Icons.email,
-                text: 'Ignored for mini button',
-                mini: true,
-                onPressed: () {
-                  _showButtonPressDialog(context, 'Email (mini)');
-                },
-                backgroundColor: Colors.cyan,
-              ),
-              SignInButton(
-                Buttons.x,
-                mini: true,
-                onPressed: () {
-                  _showButtonPressDialog(context, 'X (mini)');
-                },
-              ),
-            ],
+        ),
+        const Divider(),
+
+        // Email as SignInButton
+        Center(
+          child: SignInButton(
+            Buttons.email,
+            onPressed: () {
+              _showButtonPressDialog(context, 'Email');
+            },
           ),
-        ],
-      ),
+        ),
+        const Divider(),
+
+        // Anonymous
+        Center(
+          child: SignInButton(
+            Buttons.anonymous,
+            onPressed: () {
+              _showButtonPressDialog(context, 'Anonymous');
+            },
+          ),
+        ),
+        const Divider(),
+
+        // LinkedIn
+        Center(
+          child: SignInButton(
+            Buttons.linkedIn,
+            onPressed: () {
+              _showButtonPressDialog(context, 'LinkedIn');
+            },
+          ),
+        ),
+        const Divider(),
+
+        // Pinterest
+        Center(
+          child: SignInButton(
+            Buttons.pinterest,
+            onPressed: () {
+              _showButtonPressDialog(context, 'Pinterest');
+            },
+          ),
+        ),
+        const Divider(),
+
+        // Reddit
+        Center(
+          child: SignInButton(
+            Buttons.reddit,
+            onPressed: () {
+              _showButtonPressDialog(context, 'Reddit');
+            },
+          ),
+        ),
+        const Divider(),
+
+        // Tumblr
+        Center(
+          child: SignInButton(
+            Buttons.tumblr,
+            onPressed: () {
+              _showButtonPressDialog(context, 'Tumblr');
+            },
+          ),
+        ),
+        const Divider(),
+
+        // Quora
+        Center(
+          child: SignInButton(
+            Buttons.quora,
+            onPressed: () {
+              _showButtonPressDialog(context, 'Quora');
+            },
+          ),
+        ),
+        const Divider(),
+
+        // Yahoo
+        Center(
+          child: SignInButton(
+            Buttons.yahoo,
+            onPressed: () {
+              _showButtonPressDialog(context, 'Yahoo');
+            },
+          ),
+        ),
+        const Divider(),
+
+        // Hotmail
+        Center(
+          child: SignInButton(
+            Buttons.hotmail,
+            onPressed: () {
+              _showButtonPressDialog(context, 'Hotmail');
+            },
+          ),
+        ),
+        const Divider(),
+
+        // Xbox
+        Center(
+          child: SignInButton(
+            Buttons.xbox,
+            onPressed: () {
+              _showButtonPressDialog(context, 'Xbox');
+            },
+          ),
+        ),
+        const Divider(),
+
+        // Mini buttons row
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SignInButton(
+              Buttons.linkedIn,
+              mini: true,
+              onPressed: () async {
+                await Future<void>.delayed(const Duration(seconds: 1));
+                if (!context.mounted) return;
+                _showButtonPressDialog(context, 'LinkedIn (mini) with delay');
+              },
+            ),
+            SignInButton(
+              Buttons.tumblr,
+              mini: true,
+              onPressed: () {
+                _showButtonPressDialog(context, 'Tumblr (mini)');
+              },
+            ),
+            SignInButton(
+              Buttons.facebook,
+              mini: true,
+              onPressed: () {
+                _showButtonPressDialog(context, 'Facebook (mini)');
+              },
+            ),
+            SignInButtonBuilder(
+              icon: Icons.email,
+              text: 'Ignored for mini button',
+              mini: true,
+              onPressed: () {
+                _showButtonPressDialog(context, 'Email (mini)');
+              },
+              backgroundColor: Colors.cyan,
+            ),
+            SignInButton(
+              Buttons.x,
+              mini: true,
+              onPressed: () {
+                _showButtonPressDialog(context, 'X (mini)');
+              },
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
