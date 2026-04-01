@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 Widget _wrap(Widget child) => MaterialApp(home: Scaffold(body: child));
@@ -161,6 +162,21 @@ void main() {
       expect(find.byIcon(Icons.email), findsOneWidget);
     });
 
+    testWidgets('renders text and faIcon', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          SignInButtonBuilder(
+            text: 'Sign in with Email',
+            faIcon: FontAwesomeIcons.envelope,
+            backgroundColor: Colors.blueGrey,
+            onPressed: () {},
+          ),
+        ),
+      );
+      expect(find.text('Sign in with Email'), findsOneWidget);
+      expect(find.byIcon(FontAwesomeIcons.envelope.data), findsOneWidget);
+    });
+
     testWidgets('shows loading indicator when isLoading is true',
         (tester) async {
       await tester.pumpWidget(
@@ -210,6 +226,39 @@ void main() {
       expect(find.text('ignored'), findsNothing);
     });
 
+    testWidgets('renders mini button without text when faIcon provided', 
+      (tester) async {
+        await tester.pumpWidget(
+          _wrap(
+            SignInButtonBuilder(
+              text: 'ignored',
+              faIcon: FontAwesomeIcons.envelope,
+              backgroundColor: Colors.cyan,
+              onPressed: () {},
+              mini: true,
+            ),
+          ),
+        );
+        expect(find.byType(SignInButtonBuilder), findsOneWidget);
+        expect(find.text('ignored'), findsNothing);
+      });
+
+    testWidgets('uses faIcon over icon when both provided', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          SignInButtonBuilder(
+            text: 'Sign in',
+            icon: Icons.email,
+            faIcon: FontAwesomeIcons.envelope,
+            backgroundColor: Colors.white,
+            onPressed: () {},
+          ),
+        ),
+      );
+      expect(find.byIcon(FontAwesomeIcons.envelope.data), findsOneWidget);
+      expect(find.byIcon(Icons.email), findsNothing);
+    });
+
     testWidgets('uses image over icon when both provided', (tester) async {
       const testImage = FlutterLogo(size: 24);
       await tester.pumpWidget(
@@ -226,7 +275,25 @@ void main() {
       expect(find.byWidget(testImage), findsOneWidget);
       expect(find.byIcon(Icons.email), findsNothing);
     });
+    
+    testWidgets('uses image over faIcon when both provided', (tester) async {
+      const testImage = FlutterLogo(size: 24);
+      await tester.pumpWidget(
+        _wrap(
+          SignInButtonBuilder(
+            text: 'Sign in',
+            faIcon: FontAwesomeIcons.envelope,
+            image: testImage,
+            backgroundColor: Colors.white,
+            onPressed: () {},
+          ),
+        ),
+      );
+      expect(find.byWidget(testImage), findsOneWidget);
+      expect(find.byIcon(FontAwesomeIcons.envelope.data), findsNothing);
+    });
   });
+
 
   group('SignInButton - mini mode assertion', () {
     testWidgets('google throws in mini mode', (tester) async {
