@@ -13,7 +13,7 @@ class SignInButton extends StatefulWidget {
   const SignInButton(
     this.button, {
     required this.onPressed,
-    Key? key,
+    super.key,
     this.mini = false,
     this.padding = EdgeInsets.zero,
     this.shape,
@@ -22,14 +22,13 @@ class SignInButton extends StatefulWidget {
     this.clipBehavior = Clip.none,
     this.textStyle,
     this.loadingIndicatorColor,
-  })  : assert(
-          mini != true ||
-              !(button == Buttons.google ||
-                  button == Buttons.googleDark ||
-                  button == Buttons.facebookNew),
-          'Google and FacebookNew buttons do not support mini mode',
-        ),
-        super(key: key);
+  }) : assert(
+         !mini ||
+             !(button == Buttons.google ||
+                 button == Buttons.googleDark ||
+                 button == Buttons.facebookNew),
+         'Google and FacebookNew buttons do not support mini mode',
+       );
 
   /// The callback function to be called when the button is pressed.
   ///
@@ -219,8 +218,9 @@ class SignInButtonState extends State<SignInButton> {
               ? const Color.fromRGBO(0, 0, 0, 0.9)
               : Colors.white,
           faIcon: FontAwesomeIcons.apple,
-          iconColor:
-              widget.button == Buttons.apple ? Colors.black : Colors.white,
+          iconColor: widget.button == Buttons.apple
+              ? Colors.black
+              : Colors.white,
           backgroundColor: widget.button == Buttons.apple
               ? const Color(0xFFFFFFFF)
               : const Color(0xFF000000),

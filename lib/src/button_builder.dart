@@ -13,7 +13,7 @@ class SignInButtonBuilder extends StatelessWidget {
     required this.backgroundColor,
     required this.onPressed,
     required this.text,
-    Key? key,
+    super.key,
     this.icon,
     this.faIcon,
     this.image,
@@ -35,7 +35,7 @@ class SignInButtonBuilder extends StatelessWidget {
     this.loadingIndicatorColor,
     this.animationDuration = const Duration(milliseconds: 300),
     this.animationCurve = Curves.easeInOut,
-  }) : super(key: key);
+  });
 
   /// An optional [IconData] to display as the button's icon.
   ///
@@ -191,13 +191,10 @@ class SignInButtonBuilder extends StatelessWidget {
       duration: animationDuration,
       switchInCurve: animationCurve,
       switchOutCurve: animationCurve,
-      transitionBuilder: (Widget child, Animation<double> animation) {
+      transitionBuilder: (child, animation) {
         return ScaleTransition(
           scale: animation,
-          child: FadeTransition(
-            opacity: animation,
-            child: child,
-          ),
+          child: FadeTransition(opacity: animation, child: child),
         );
       },
       child: isLoading ? _getLoadingIndicator() : _getButtonContent(context),
@@ -209,7 +206,8 @@ class SignInButtonBuilder extends StatelessWidget {
     if (mini) {
       return SizedBox(
         key: const ValueKey(
-            'button_icon_mini'), // Add a key for AnimatedSwitcher
+          'button_icon_mini',
+        ), // Add a key for AnimatedSwitcher
         width: height ?? 35.0,
         height: width ?? 35.0,
         child: _getIconOrImage(),
@@ -220,28 +218,26 @@ class SignInButtonBuilder extends StatelessWidget {
 
     return Container(
       key: const ValueKey(
-          'button_content_full'), // Add a key for AnimatedSwitcher
+        'button_content_full',
+      ), // Add a key for AnimatedSwitcher
       constraints: BoxConstraints(maxWidth: buttonWidth),
       child: Center(
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Padding(
-              padding: innerPadding ??
-                  const EdgeInsets.symmetric(
-                    horizontal: 13,
-                  ),
+              padding:
+                  innerPadding ?? const EdgeInsets.symmetric(horizontal: 13),
               child: _getIconOrImage(),
             ),
             Container(
-              constraints: BoxConstraints(
-                maxWidth: buttonWidth - 50,
-              ),
+              constraints: BoxConstraints(maxWidth: buttonWidth - 50),
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
                   text,
-                  style: textStyle ??
+                  style:
+                      textStyle ??
                       TextStyle(
                         color: textColor,
                         fontSize: fontSize,
@@ -259,8 +255,9 @@ class SignInButtonBuilder extends StatelessWidget {
   /// Get the loading indicator widget
   Widget _getLoadingIndicator() {
     return SizedBox(
-      key:
-          const ValueKey('loading_indicator'), // Add a key for AnimatedSwitcher
+      key: const ValueKey(
+        'loading_indicator',
+      ), // Add a key for AnimatedSwitcher
       width: mini
           ? (height ?? 24.0)
           : 24.0, // Smaller indicator for mini, standard for full
@@ -278,16 +275,8 @@ class SignInButtonBuilder extends StatelessWidget {
       return image!;
     }
     if (faIcon != null) {
-      return FaIcon(
-        faIcon,
-        size: 20,
-        color: iconColor,
-      );
+      return FaIcon(faIcon, size: 20, color: iconColor);
     }
-    return Icon(
-      icon,
-      size: 20,
-      color: iconColor,
-    );
+    return Icon(icon, size: 20, color: iconColor);
   }
 }

@@ -12,14 +12,7 @@ void main() {
 
     for (final button in Buttons.values) {
       testWidgets('$button renders without error', (tester) async {
-        await tester.pumpWidget(
-          _wrap(
-            SignInButton(
-              button,
-              onPressed: () {},
-            ),
-          ),
-        );
+        await tester.pumpWidget(_wrap(SignInButton(button, onPressed: () {})));
         expect(find.byType(SignInButton), findsOneWidget);
         // Verify no loading indicator is shown by default
         expect(find.byType(CircularProgressIndicator), findsNothing);
@@ -28,13 +21,7 @@ void main() {
       if (!noMini.contains(button)) {
         testWidgets('$button renders in mini mode', (tester) async {
           await tester.pumpWidget(
-            _wrap(
-              SignInButton(
-                button,
-                mini: true,
-                onPressed: () {},
-              ),
-            ),
+            _wrap(SignInButton(button, mini: true, onPressed: () {})),
           );
           expect(find.byType(SignInButton), findsOneWidget);
         });
@@ -43,8 +30,9 @@ void main() {
   });
 
   group('SignInButton - loading state', () {
-    testWidgets('shows loading indicator while async onPressed runs',
-        (tester) async {
+    testWidgets('shows loading indicator while async onPressed runs', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _wrap(
           SignInButton(
@@ -87,8 +75,9 @@ void main() {
       expect(callCount, 1);
     });
 
-    testWidgets('resets loading state after onPressed completes',
-        (tester) async {
+    testWidgets('resets loading state after onPressed completes', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _wrap(
           SignInButton(
@@ -177,8 +166,9 @@ void main() {
       expect(find.byIcon(FontAwesomeIcons.envelope.data), findsOneWidget);
     });
 
-    testWidgets('shows loading indicator when isLoading is true',
-        (tester) async {
+    testWidgets('shows loading indicator when isLoading is true', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _wrap(
           SignInButtonBuilder(
@@ -194,8 +184,9 @@ void main() {
       expect(find.text('Sign in'), findsNothing);
     });
 
-    testWidgets('hides loading indicator when isLoading is false',
-        (tester) async {
+    testWidgets('hides loading indicator when isLoading is false', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _wrap(
           SignInButtonBuilder(
@@ -226,22 +217,23 @@ void main() {
       expect(find.text('ignored'), findsNothing);
     });
 
-    testWidgets('renders mini button without text when faIcon provided', 
-      (tester) async {
-        await tester.pumpWidget(
-          _wrap(
-            SignInButtonBuilder(
-              text: 'ignored',
-              faIcon: FontAwesomeIcons.envelope,
-              backgroundColor: Colors.cyan,
-              onPressed: () {},
-              mini: true,
-            ),
+    testWidgets('renders mini button without text when faIcon provided', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          SignInButtonBuilder(
+            text: 'ignored',
+            faIcon: FontAwesomeIcons.envelope,
+            backgroundColor: Colors.cyan,
+            onPressed: () {},
+            mini: true,
           ),
-        );
-        expect(find.byType(SignInButtonBuilder), findsOneWidget);
-        expect(find.text('ignored'), findsNothing);
-      });
+        ),
+      );
+      expect(find.byType(SignInButtonBuilder), findsOneWidget);
+      expect(find.text('ignored'), findsNothing);
+    });
 
     testWidgets('uses faIcon over icon when both provided', (tester) async {
       await tester.pumpWidget(
@@ -275,7 +267,7 @@ void main() {
       expect(find.byWidget(testImage), findsOneWidget);
       expect(find.byIcon(Icons.email), findsNothing);
     });
-    
+
     testWidgets('uses image over faIcon when both provided', (tester) async {
       const testImage = FlutterLogo(size: 24);
       await tester.pumpWidget(
@@ -294,37 +286,24 @@ void main() {
     });
   });
 
-
   group('SignInButton - mini mode assertion', () {
     testWidgets('google throws in mini mode', (tester) async {
       expect(
-        () => SignInButton(
-          Buttons.google,
-          mini: true,
-          onPressed: () {},
-        ),
+        () => SignInButton(Buttons.google, mini: true, onPressed: () {}),
         throwsAssertionError,
       );
     });
 
     testWidgets('googleDark throws in mini mode', (tester) async {
       expect(
-        () => SignInButton(
-          Buttons.googleDark,
-          mini: true,
-          onPressed: () {},
-        ),
+        () => SignInButton(Buttons.googleDark, mini: true, onPressed: () {}),
         throwsAssertionError,
       );
     });
 
     testWidgets('facebookNew throws in mini mode', (tester) async {
       expect(
-        () => SignInButton(
-          Buttons.facebookNew,
-          mini: true,
-          onPressed: () {},
-        ),
+        () => SignInButton(Buttons.facebookNew, mini: true, onPressed: () {}),
         throwsAssertionError,
       );
     });

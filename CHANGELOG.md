@@ -1,6 +1,7 @@
 ## 5.0.0
 BREAKING:
 - font_awesome_flutter is upgraded from v10 to v11
+- Raised the minimum SDK requirements to Dart 3.9 and Flutter 3.27
 - Added faIcon for Font Awesome icons
 
 ## 4.1.0
