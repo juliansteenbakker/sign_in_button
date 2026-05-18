@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 /// A customizable button widget for various sign-in methods.
 ///
@@ -14,6 +15,7 @@ class SignInButtonBuilder extends StatelessWidget {
     required this.text,
     Key? key,
     this.icon,
+    this.faIcon,
     this.image,
     this.fontSize = 14.0,
     this.textColor = Colors.white,
@@ -37,10 +39,17 @@ class SignInButtonBuilder extends StatelessWidget {
 
   /// An optional [IconData] to display as the button's icon.
   ///
-  /// This can be a Flutter built-in [Icons] or an icon from a package like
-  /// `font_awesome_flutter`. If [image] is also provided, [image] will take
-  /// precedence.
+  /// This is specifically for icons from the Flutter built-in [Icons] class.
+  /// If [faIcon] is also provided, [faIcon] will take precedence over [icon].
+  /// If [image] is also provided, [image] will take precedence.
   final IconData? icon;
+
+  /// An optional [FaIconData] to display as the button's icon.
+  ///
+  /// This is specifically for icons from the `font_awesome_flutter` package.
+  /// If [icon] is also provided, [faIcon] will take precedence over [icon].
+  /// If [image] is also provided, [image] will take precedence.
+  final FaIconData? faIcon;
 
   /// An optional [Widget] to display as the button's logo, overriding [icon].
   ///
@@ -75,9 +84,10 @@ class SignInButtonBuilder extends StatelessWidget {
   /// is not null.
   final Color textColor;
 
-  /// The color of the [icon].
+  /// The color of the [icon] or [faIcon].
   ///
-  /// Defaults to `Colors.white`. This color only applies if an [icon] is used.
+  /// Defaults to `Colors.white`. This color only applies if an [icon]
+  ///  or [faIcon] is used.
   final Color iconColor;
 
   /// The background color of the button.
@@ -266,6 +276,13 @@ class SignInButtonBuilder extends StatelessWidget {
   Widget _getIconOrImage() {
     if (image != null) {
       return image!;
+    }
+    if (faIcon != null) {
+      return FaIcon(
+        faIcon,
+        size: 20,
+        color: iconColor,
+      );
     }
     return Icon(
       icon,

@@ -1,3 +1,8 @@
+## 5.0.0
+BREAKING:
+- font_awesome_flutter is upgraded from v10 to v11
+- Added faIcon for Font Awesome icons
+
 ## 4.1.0
 - Added support for font_awesome_flutter v10
 
