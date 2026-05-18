@@ -235,6 +235,26 @@ void main() {
       expect(find.text('ignored'), findsNothing);
     });
 
+    testWidgets('centers faIcon in mini button', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          SignInButtonBuilder(
+            text: 'ignored',
+            faIcon: FontAwesomeIcons.envelope,
+            backgroundColor: Colors.cyan,
+            onPressed: () {},
+            mini: true,
+          ),
+        ),
+      );
+
+      final iconCenter = tester.getCenter(find.byType(FaIcon));
+      final buttonCenter = tester.getCenter(find.byType(MaterialButton));
+
+      expect(iconCenter.dx, buttonCenter.dx);
+      expect(iconCenter.dy, buttonCenter.dy);
+    });
+
     testWidgets('uses faIcon over icon when both provided', (tester) async {
       await tester.pumpWidget(
         _wrap(

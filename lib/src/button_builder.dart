@@ -210,7 +210,7 @@ class SignInButtonBuilder extends StatelessWidget {
         ), // Add a key for AnimatedSwitcher
         width: height ?? 35.0,
         height: width ?? 35.0,
-        child: _getIconOrImage(),
+        child: Center(child: _getIconOrImage()),
       );
     }
 
