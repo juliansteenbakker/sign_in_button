@@ -17,7 +17,7 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-      - uses: subosito/flutter-action@v2.21.0
+      - uses: subosito/flutter-action@v2.23.0
         with:
           cache: true
       - name: Version
@@ -34,7 +34,7 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-      - uses: subosito/flutter-action@v2.21.0
+      - uses: subosito/flutter-action@v2.23.0
         with:
           cache: true
       - name: Version
@@ -51,7 +51,7 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-      - uses: subosito/flutter-action@v2.20.0
+      - uses: subosito/flutter-action@v2.23.0
         with:
           cache: true
       - name: Install dependencies
