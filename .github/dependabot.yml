@@ -1,38 +1,70 @@
 version: 2
+
+# Applies to every ecosystem below.
+#
+# Updates that ship to package consumers (the package's own pub dependencies)
+# use "deps". Dev-only ecosystems (CI actions, the example app) use "chore".
+# Reviewers are not listed: CODEOWNERS already requests review on everything,
+# and the key is deprecated.
+#
+# The cooldown lets a release settle before it is proposed, so that a version
+# superseded within days never costs a PR. Security updates ignore it.
+
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
-    reviewers:
-      - "juliansteenbakker"
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns:
+          - "*"
     commit-message:
-      prefix: "chore"
-      include: "scope"
+      prefix: chore
+      include: scope
+
   - package-ecosystem: gradle
-    directory: "/android"
+    directory: /example/android
     schedule:
-      interval: "weekly"
-    reviewers:
-      - "juliansteenbakker"
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      example-android:
+        patterns:
+          - "*"
     commit-message:
-      prefix: "chore"
-      include: "scope"
-  - package-ecosystem: gradle
-    directory: "/example/android"
+      prefix: chore
+      include: scope
+
+  # prefix-development keeps a bump of a dev_dependency, which no consumer of
+  # the package resolves, under "chore".
+  - package-ecosystem: pub
+    directory: /
     schedule:
-      interval: "weekly"
-    reviewers:
-      - "juliansteenbakker"
+      interval: weekly
+    cooldown:
+      default-days: 7
     commit-message:
-      prefix: "chore"
-      include: "scope"
-  - package-ecosystem: "pub"
-    directory: "/"
+      prefix: deps
+      prefix-development: chore
+
+  # The example resolves the package through a path dependency. Dependabot would
+  # pin it to the released version, which breaks resolution on the next bump.
+  - package-ecosystem: pub
+    directory: /example
     schedule:
-      interval: "weekly"
+      interval: weekly
+    cooldown:
+      default-days: 7
+    ignore:
+      - dependency-name: sign_in_button
+    groups:
+      example-dart:
+        patterns:
+          - "*"
     commit-message:
-      prefix: "chore"
-      include: "scope"
-    reviewers:
-      - "juliansteenbakker"
+      prefix: chore
+      include: scope
