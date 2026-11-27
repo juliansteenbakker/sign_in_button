@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 Widget _wrap(Widget child) => MaterialApp(home: Scaffold(body: child));
@@ -118,6 +118,42 @@ void main() {
 
       await tester.pumpAndSettle();
     });
+
+    testWidgets(
+      'uses material_ui ThemeData when loadingIndicatorColor is null',
+      (tester) async {
+        const customPrimary = Color(0xFFFF8C00);
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: ThemeData(
+              colorScheme: const ColorScheme.light(primary: customPrimary),
+            ),
+            home: Scaffold(
+              body: SignInButton(
+                Buttons.apple,
+                onPressed: () async {
+                  await Future<void>.delayed(const Duration(seconds: 1));
+                },
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.byType(SignInButton));
+        await tester.pump();
+
+        final indicatorFinder = find.byType(CircularProgressIndicator);
+        expect(indicatorFinder, findsOneWidget);
+        final indicator = tester.widget<CircularProgressIndicator>(
+          indicatorFinder,
+        );
+        expect(indicator.color, isNull);
+        final context = tester.element(indicatorFinder);
+        expect(Theme.of(context).colorScheme.primary, customPrimary);
+
+        await tester.pumpAndSettle();
+      },
+    );
   });
 
   group('SignInButton - text override', () {
