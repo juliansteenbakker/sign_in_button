@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   /// This is an example app which make use of
   /// `SignInButtonBuilder` and `SignInButton` class
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
 }
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super.key});
 
   /// Show a simple "___ Button Pressed" indicator
   void _showButtonPressDialog(BuildContext context, String provider) {
